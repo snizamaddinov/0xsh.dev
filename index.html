@@ -4,7 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>0xsh.dev</title>
-    <style>
+   <style>
+        :root {
+            color-scheme: light dark;
+        }
+
+        html {
+            background: #fff;
+        }
+
         body {
             font-family: monospace;
             max-width: 600px;
@@ -12,13 +20,30 @@
             padding: 0 20px;
             line-height: 1.6;
             color: #222;
-            background: #fff;
+            background: transparent;
         }
-        a { color: #0066cc; text-decoration: none; }
-        a:hover { text-decoration: underline; }
+
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
         @media (prefers-color-scheme: dark) {
-            body { color: #e0e0e0; background: #121212; }
-            a { color: #8ab4f8; }
+            html {
+                background: #121212;
+            }
+
+            body {
+                color: #e0e0e0;
+            }
+
+            a {
+                color: #8ab4f8;
+            }
         }
     </style>
 </head>
@@ -30,7 +55,7 @@
     <p>
         <a href="https://github.com/snizamaddinov" target="_blank" and rel="noopener noreferrer">github</a> / 
         <a href="https://linkedin.com/in/shanazar-nizamaddinov/" target="_blank" and rel="noopener noreferrer">linkedin</a> / 
-        <a href="mailto:me@shanazar.com" target="_blank" and rel="noopener noreferrer">email</a>
+        <a href="mailto:me@shanazar.com" target="_blank" rel="noopener noreferrer">email</a>
     </p>
 </body>
 </html>
