@@ -3,59 +3,224 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>0x53.dev</title>
+    <title>Shanazar Terminal: Third Build</title>
+    <script>
+        const baseTitle = "Shanazar Terminal: Third Build";
+        let blink = true;
+        
+        setInterval(() => {
+            document.title = blink ? `${baseTitle} ▌` : baseTitle;
+            blink = !blink;
+        }, 600);
+    </script>
    <style>
         :root {
-            color-scheme: light dark;
+            color-scheme: dark;
+            --void: #09070f;
+            --panel: rgba(22, 14, 34, 0.82);
+            --purple: #6d36ff;
+            --acid: #9dff00;
+            --amber: #ff8a00;
+            --alert: #ff2b75;
+            --text: #f2f0ff;
+            --muted: #b7abc9;
+        }
+
+        * {
+            box-sizing: border-box;
         }
 
         html {
-            background: #fff;
+            min-height: 100%;
+            background:
+                linear-gradient(115deg, rgba(109, 54, 255, 0.24), transparent 38%),
+                linear-gradient(245deg, rgba(157, 255, 0, 0.12), transparent 34%),
+                radial-gradient(circle at 75% 18%, rgba(255, 43, 117, 0.2), transparent 28%),
+                var(--void);
         }
 
         body {
-            font-family: monospace;
-            max-width: 600px;
-            margin: 40px auto;
-            padding: 0 20px;
-            line-height: 1.6;
-            color: #222;
+            min-height: 100vh;
+            margin: 0;
+            padding: 42px 20px;
+            display: grid;
+            place-items: center;
+            font-family: "Courier New", monospace;
+            line-height: 1.55;
+            color: var(--text);
             background: transparent;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background:
+                repeating-linear-gradient(
+                    0deg,
+                    rgba(255, 255, 255, 0.04) 0,
+                    rgba(255, 255, 255, 0.04) 1px,
+                    transparent 1px,
+                    transparent 5px
+                );
+            mix-blend-mode: screen;
+            opacity: 0.38;
+        }
+
+        main {
+            width: min(760px, 100%);
+            border: 1px solid rgba(157, 255, 0, 0.42);
+            background: var(--panel);
+            box-shadow:
+                0 0 0 6px rgba(109, 54, 255, 0.12),
+                0 0 42px rgba(109, 54, 255, 0.45),
+                inset 0 0 28px rgba(157, 255, 0, 0.08);
+            position: relative;
+        }
+
+        main::before,
+        main::after {
+            content: "";
+            position: absolute;
+            width: 72px;
+            height: 72px;
+            border-color: var(--acid);
+            border-style: solid;
+            pointer-events: none;
+        }
+
+        main::before {
+            top: -1px;
+            left: -1px;
+            border-width: 3px 0 0 3px;
+        }
+
+        main::after {
+            right: -1px;
+            bottom: -1px;
+            border-width: 0 3px 3px 0;
+        }
+
+        .signal {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 18px;
+            align-items: center;
+            border-bottom: 1px solid rgba(157, 255, 0, 0.32);
+            padding: 16px 18px;
+            color: var(--acid);
+            text-transform: uppercase;
+            letter-spacing: 0;
+            font-size: 0.82rem;
+        }
+
+        .status {
+            color: var(--amber);
+        }
+
+        .content {
+            padding: 38px 34px 34px;
+        }
+
+        h1 {
+            margin: 0 0 12px;
+            font-size: clamp(2.1rem, 9vw, 5.2rem);
+            line-height: 0.92;
+            letter-spacing: 0;
+            color: var(--text);
+            text-transform: uppercase;
+            text-shadow:
+                3px 0 0 var(--purple),
+                -2px 0 0 var(--alert),
+                0 0 22px rgba(157, 255, 0, 0.22);
+        }
+
+        .subtitle {
+            margin: 0 0 30px;
+            color: var(--acid);
+            font-size: 1rem;
+            text-transform: uppercase;
+        }
+
+        .bio {
+            max-width: 58ch;
+            margin: 0 0 14px;
+            color: var(--muted);
+        }
+
+        .stack {
+            display: inline-block;
+            margin: 18px 0 28px;
+            padding: 8px 12px;
+            border-left: 4px solid var(--amber);
+            background: rgba(255, 138, 0, 0.1);
+            color: var(--text);
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
         a {
-            color: #0066cc;
+            min-width: 92px;
+            padding: 9px 12px;
+            border: 1px solid rgba(157, 255, 0, 0.54);
+            color: var(--acid);
+            background: rgba(9, 7, 15, 0.62);
+            text-align: center;
             text-decoration: none;
+            text-transform: uppercase;
         }
 
-        a:hover {
-            text-decoration: underline;
+        a:hover,
+        a:focus-visible {
+            color: var(--void);
+            background: var(--acid);
+            box-shadow: 0 0 18px rgba(157, 255, 0, 0.58);
+            outline: none;
         }
 
-        @media (prefers-color-scheme: dark) {
-            html {
-                background: #121212;
+        @media (max-width: 540px) {
+            body {
+                padding: 20px 14px;
             }
 
-            body {
-                color: #e0e0e0;
+            .signal {
+                grid-template-columns: 1fr;
+                gap: 4px;
+            }
+
+            .content {
+                padding: 30px 20px 24px;
             }
 
             a {
-                color: #8ab4f8;
+                flex: 1 1 100%;
             }
         }
     </style>
 </head>
 <body>
-    <p><strong>Shanazar Nizamaddinov</strong></p>
-    <p>computer engineer focusing on backend architecture, systems, and terminal-based workflows.</p>
-    <p>stack: php (symfony), python (django), mysql, mongodb, docker</p>
-    <br>
-    <p>
-        <a href="https://github.com/snizamaddinov" target="_blank" and rel="noopener noreferrer">github</a> / 
-        <a href="https://linkedin.com/in/shanazar-nizamaddinov/" target="_blank" and rel="noopener noreferrer">linkedin</a> / 
-        <a href="mailto:me@shanazar.com" target="_blank" rel="noopener noreferrer">email</a>
-    </p>
+    <main aria-label="profile">
+        <div class="signal">
+            <span>MAGI access node / personal interface</span>
+            <span class="status">sync ratio 100%</span>
+        </div>
+        <section class="content">
+            <h1>Shanazar Nizamaddinov</h1>
+            <p class="subtitle">Terminal Impact Engineer</p>
+            <p class="bio">Computer engineer focusing on backend architecture, systems, and terminal-based workflows.</p>
+            <p class="stack">stack: php (symfony), python (django), mysql, mongodb, docker</p>
+            <nav aria-label="links">
+                <a href="https://github.com/snizamaddinov" target="_blank" rel="noopener noreferrer">github</a>
+                <a href="https://linkedin.com/in/shanazar-nizamaddinov/" target="_blank" rel="noopener noreferrer">linkedin</a>
+                <a href="mailto:me@shanazar.com" target="_blank" rel="noopener noreferrer">email</a>
+            </nav>
+        </section>
+    </main>
 </body>
 </html>
